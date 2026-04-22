@@ -14,7 +14,7 @@
     },
     "ignoreDeprecations": "6.0",
 
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
