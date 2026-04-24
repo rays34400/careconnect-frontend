@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import photoRdvHome from "@/assets/images/photoRdvHome.jpg";
 
 export default function HeroSection() {
   return (
@@ -35,7 +36,7 @@ export default function HeroSection() {
         {/* IMAGE */}
         <div className="rounded-[2rem] bg-white p-4 shadow-lg">
           <img
-            src="src/assets/images/photoRdvHome.jpg"
+            src={photoRdvHome}
             alt="Illustration santé"
             className="h-[420px] w-full rounded-[1.5rem] object-cover transition duration-300 hover:scale-[1.01]"
           />
