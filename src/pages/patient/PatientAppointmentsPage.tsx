@@ -91,30 +91,32 @@ export default function PatientAppointmentsPage() {
     <div className="min-h-screen bg-slate-50">
       <Navbar />
 
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <SideMenu />
 
-        <main className="flex-1 px-6 py-10">
+        <main className="flex-1 px-4 py-6 md:px-6 md:py-10">
           <div className="mx-auto max-w-5xl">
-            <h1 className="text-3xl font-bold">Mes rendez-vous</h1>
+            <h1 className="text-2xl font-bold md:text-3xl">
+              Mes rendez-vous
+            </h1>
 
-            <p className="mt-2 text-slate-500">
+            <p className="mt-2 text-sm text-slate-500 md:text-base">
               Consultez l’état de vos rendez-vous.
             </p>
 
             {successMessage && (
-              <div className="mt-4 rounded-2xl bg-green-50 px-4 py-3 text-green-700">
+              <div className="mt-4 rounded-2xl bg-green-50 px-4 py-3 text-sm text-green-700">
                 {successMessage}
               </div>
             )}
 
             {errorMessage && (
-              <div className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-red-700">
+              <div className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
                 {errorMessage}
               </div>
             )}
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-2 md:gap-3">
               {[
                 { label: "Tous", value: "all" },
                 { label: "En attente", value: "pending" },
@@ -125,13 +127,17 @@ export default function PatientAppointmentsPage() {
                   key={item.value}
                   onClick={() =>
                     setFilter(
-                      item.value as "all" | "pending" | "confirmed" | "cancelled"
+                      item.value as
+                        | "all"
+                        | "pending"
+                        | "confirmed"
+                        | "cancelled"
                     )
                   }
-                  className={`rounded-xl border px-4 py-2 text-sm ${
+                  className={`rounded-xl border px-3 py-2 text-xs md:px-4 md:text-sm ${
                     filter === item.value
                       ? "border-violet-600 bg-violet-600 text-white"
-                      : "hover:border-violet-400"
+                      : "bg-white hover:border-violet-400"
                   }`}
                 >
                   {item.label}
@@ -150,7 +156,7 @@ export default function PatientAppointmentsPage() {
                 {filteredAppointments.map((appt) => (
                   <div
                     key={appt._id}
-                    className="flex items-center justify-between rounded-2xl bg-white p-5 shadow-sm"
+                    className="flex flex-col gap-4 rounded-2xl bg-white p-5 shadow-sm md:flex-row md:items-center md:justify-between"
                   >
                     <div>
                       <p className="font-semibold">
@@ -186,6 +192,7 @@ export default function PatientAppointmentsPage() {
                       <Button
                         variant="destructive"
                         onClick={() => handleCancel(appt._id)}
+                        className="w-full md:w-auto"
                       >
                         Annuler
                       </Button>

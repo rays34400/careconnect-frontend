@@ -78,16 +78,16 @@ export default function PatientPendingAppointmentsPage() {
     <div className="min-h-screen bg-slate-50">
       <Navbar />
 
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <SideMenu />
 
-        <main className="flex-1 px-6 py-10">
+        <main className="flex-1 px-4 py-6 md:px-6 md:py-10">
           <div className="mx-auto max-w-5xl">
-            <h1 className="text-3xl font-bold text-slate-900">
+            <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
               Mes rendez-vous en attente
             </h1>
 
-            <p className="mt-2 text-slate-500">
+            <p className="mt-2 text-sm text-slate-500 md:text-base">
               Voici vos demandes de rendez-vous en attente de confirmation.
             </p>
 
@@ -139,6 +139,7 @@ export default function PatientPendingAppointmentsPage() {
                       <Button
                         variant="destructive"
                         onClick={() => handleCancel(appt._id)}
+                        className="w-full md:w-auto"
                       >
                         Annuler
                       </Button>

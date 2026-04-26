@@ -11,6 +11,7 @@ export default function SideMenu() {
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState<LocalUser | null>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,15 +29,20 @@ export default function SideMenu() {
     localStorage.removeItem("user");
     setIsLogged(false);
     setUser(null);
+    setOpen(false);
     navigate("/");
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
   };
 
   const linkClass =
     "rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-violet-600";
 
   return (
-    <div className="p-4">
-      <Sheet>
+    <div className="p-3 md:p-4">
+      <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button
             variant="outline"
@@ -46,11 +52,15 @@ export default function SideMenu() {
           </Button>
         </SheetTrigger>
 
-        <SheetContent side="left" className="w-80 border-r border-slate-200">
-          <div className="mt-6 px-4">
+        <SheetContent
+          side="left"
+          className="w-[85vw] max-w-80 border-r border-slate-200"
+        >
+          <div className="mt-6 px-2 md:px-4">
             <h2 className="mb-2 text-lg font-semibold text-slate-900">
               Navigation
             </h2>
+
             <p className="mb-6 text-sm text-slate-500">
               Accédez rapidement aux pages principales.
             </p>
@@ -58,32 +68,51 @@ export default function SideMenu() {
             <div className="flex flex-col gap-3">
               {!isLogged ? (
                 <>
-                  <Link to="/" className={linkClass}>
+                  <Link to="/" onClick={closeMenu} className={linkClass}>
                     Accueil
                   </Link>
-                  <Link to="/professionals" className={linkClass}>
+
+                  <Link
+                    to="/professionals"
+                    onClick={closeMenu}
+                    className={linkClass}
+                  >
                     Professionnels
                   </Link>
-                  <Link to="/login" className={linkClass}>
+
+                  <Link to="/login" onClick={closeMenu} className={linkClass}>
                     Connexion
                   </Link>
-                  <Link to="/register" className={linkClass}>
+
+                  <Link to="/register" onClick={closeMenu} className={linkClass}>
                     Inscription
                   </Link>
                 </>
               ) : user?.role === "professional" ? (
                 <>
-                  <Link to="/profile" className={linkClass}>
+                  <Link to="/profile" onClick={closeMenu} className={linkClass}>
                     Mon profil
                   </Link>
-                  <Link to="/professional/availabilities" className={linkClass}>
+
+                  <Link
+                    to="/professional/availabilities"
+                    onClick={closeMenu}
+                    className={linkClass}
+                  >
                     Mes disponibilités
                   </Link>
-                  <Link to="/appointments" className={linkClass}>
+
+                  <Link
+                    to="/appointments"
+                    onClick={closeMenu}
+                    className={linkClass}
+                  >
                     Mes rendez-vous
                   </Link>
+
                   <Link
                     to="/professional/pending-appointments"
+                    onClick={closeMenu}
                     className={linkClass}
                   >
                     Rendez-vous en attente
@@ -98,13 +127,23 @@ export default function SideMenu() {
                 </>
               ) : (
                 <>
-                  <Link to="/profile" className={linkClass}>
+                  <Link to="/profile" onClick={closeMenu} className={linkClass}>
                     Mon profil
                   </Link>
-                  <Link to="/appointments" className={linkClass}>
+
+                  <Link
+                    to="/appointments"
+                    onClick={closeMenu}
+                    className={linkClass}
+                  >
                     Mes rendez-vous
                   </Link>
-                  <Link to="/patient/pending-appointments" className={linkClass}>
+
+                  <Link
+                    to="/patient/pending-appointments"
+                    onClick={closeMenu}
+                    className={linkClass}
+                  >
                     Rendez-vous en attente
                   </Link>
 
