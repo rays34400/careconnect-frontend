@@ -84,7 +84,7 @@ export default function ProfessionalDetailPage() {
   const [bookingLoading, setBookingLoading] = useState(false);
   const [bookingMessage, setBookingMessage] = useState("");
   const [bookingError, setBookingError] = useState("");
-
+const API_BASE_URL = import.meta.env.VITE_API_URL.replace("/api", "");
   const isLogged = !!localStorage.getItem("token");
 
   useEffect(() => {
@@ -209,11 +209,15 @@ export default function ProfessionalDetailPage() {
               <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
                 <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-3xl bg-slate-100 text-3xl font-bold text-violet-600">
                   {professional.photo ? (
-                    <img
-                      src={`${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/${professional.photo}`}
-                      alt="photo"
-                      className="h-full w-full object-cover"
-                    />
+                   <img
+  src={
+    professional.photo.startsWith("/uploads")
+      ? `${API_BASE_URL}${professional.photo}`
+      : `${API_BASE_URL}/uploads/${professional.photo}`
+  }
+  alt="photo"
+  className="h-full w-full object-cover"
+/>
                   ) : (
                     <>
                       {professional.prenom?.[0]}
@@ -221,7 +225,6 @@ export default function ProfessionalDetailPage() {
                     </>
                   )}
                 </div>
-
                 <div className="flex-1">
                   <h1 className="text-4xl font-bold">
                     {professional.prenom} {professional.nom}
