@@ -210,7 +210,7 @@ export default function ProfessionalDetailPage() {
                 <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-3xl bg-slate-100 text-3xl font-bold text-violet-600">
                   {professional.photo ? (
                     <img
-                      src={`${import.meta.env.VITE_API_URL.replace("/api", "")}${professional.photo}`}
+                      src={`${import.meta.env.VITE_API_URL}${professional.photo}`}
                       alt="photo"
                       className="h-full w-full object-cover"
                     />
